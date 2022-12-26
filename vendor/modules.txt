@@ -161,6 +161,9 @@ github.com/dsnet/compress/internal/prefix
 github.com/dustin/go-humanize
 # github.com/dyatlov/go-opengraph v0.0.0-20210112100619-dae8665a5b09
 github.com/dyatlov/go-opengraph/opengraph
+# github.com/essentialkaos/translit/v2 v2.0.4
+## explicit
+github.com/essentialkaos/translit/v2
 # github.com/fatih/color v1.13.0
 github.com/fatih/color
 # github.com/fatih/set v0.2.1

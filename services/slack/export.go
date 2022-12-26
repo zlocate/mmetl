@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/essentialkaos/translit/v2"
 	"github.com/mattermost/mattermost-server/v6/app"
 	"github.com/mattermost/mattermost-server/v6/model"
 	"github.com/pkg/errors"
@@ -20,6 +21,7 @@ const (
 )
 
 var isValidChannelNameCharacters = regexp.MustCompile(`^[a-zA-Z0-9\-_]+$`).MatchString
+var isValidDisplayNameCharacters = regexp.MustCompile(`^[a-zа-яА-ЯёЁA-Z0-9\-_]+$`).MatchString
 
 func truncateRunes(s string, i int) string {
 	runes := []rune(s)
@@ -56,7 +58,7 @@ func SlackConvertChannelName(channelName string, channelId string) string {
 	if isValidChannelNameCharacters(newName) {
 		return newName
 	}
-	return strings.ToLower(channelId)
+	return strings.ToLower(translit.EncodeToICAO(channelName))
 }
 
 func SplitChannelsByMemberSize(channels []SlackChannel, limit int) (regularChannels, bigChannels []SlackChannel) {
