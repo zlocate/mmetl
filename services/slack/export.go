@@ -21,6 +21,7 @@ const (
 )
 
 var isValidChannelNameCharacters = regexp.MustCompile(`^[a-zA-Z0-9\-_]+$`).MatchString
+var isValidDisplayNameCharacters = regexp.MustCompile(`^[a-zа-яА-ЯёЁA-Z0-9\-_]+$`).MatchString
 
 func truncateRunes(s string, i int) string {
 	runes := []rune(s)

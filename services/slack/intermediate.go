@@ -57,7 +57,7 @@ func (c *IntermediateChannel) Sanitise(logger log.FieldLogger) {
 	if len(c.DisplayName) == 1 {
 		c.DisplayName = "slack-channel-" + c.DisplayName
 	}
-	if !isValidChannelNameCharacters(c.DisplayName) {
+	if !isValidDisplayNameCharacters(c.DisplayName) {
 		c.DisplayName = strings.ToLower(c.Id)
 	}
 
@@ -151,6 +151,7 @@ func filterValidMembers(members []string, users map[string]*IntermediateUser) []
 }
 
 func getOriginalName(channel SlackChannel) string {
+	fmt.Println(channel.Name)
 	if channel.Name == "" {
 		return channel.Id
 	} else {
@@ -172,11 +173,12 @@ func (t *Transformer) TransformChannels(channels []SlackChannel) []*Intermediate
 			channel.Type = model.ChannelTypePrivate
 		}
 
+		displayName := (channel.Name + ".")[:len(channel.Name)]
 		name := SlackConvertChannelName(channel.Name, channel.Id)
 		newChannel := &IntermediateChannel{
 			OriginalName: getOriginalName(channel),
 			Name:         name,
-			DisplayName:  name,
+			DisplayName:  displayName,
 			Members:      validMembers,
 			Purpose:      channel.Purpose.Value,
 			Header:       channel.Topic.Value,
