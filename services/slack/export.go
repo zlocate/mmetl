@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/essentialkaos/translit/v2"
 	"github.com/mattermost/mattermost-server/v6/app"
 	"github.com/mattermost/mattermost-server/v6/model"
 	"github.com/pkg/errors"
@@ -56,7 +57,7 @@ func SlackConvertChannelName(channelName string, channelId string) string {
 	if isValidChannelNameCharacters(newName) {
 		return newName
 	}
-	return strings.ToLower(channelId)
+	return strings.ToLower(translit.EncodeToICAO(channelName))
 }
 
 func SplitChannelsByMemberSize(channels []SlackChannel, limit int) (regularChannels, bigChannels []SlackChannel) {

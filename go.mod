@@ -9,4 +9,5 @@ require (
 	github.com/spf13/cobra v1.4.0
 	github.com/stretchr/testify v1.7.1
 	golang.org/x/text v0.3.7
+	github.com/essentialkaos/translit/v2 v2.0.4
 )
